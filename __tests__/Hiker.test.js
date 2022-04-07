@@ -4,7 +4,10 @@ const Itinerary = require("../src/Itinerary.js");
 
 describe("Hiker", () => {
   it("can be instantiated", () => {
-    expect(new Hiker()).toBeInstanceOf(Object);
+    const mountain = new Mountain("Ben Nevis");
+    const itinerary = new Itinerary([mountain]);
+    const hiker = new Hiker(itinerary);
+    expect(hiker).toBeInstanceOf(Object);
   });
 
   it("has a starting mountain", () => {
@@ -17,25 +20,37 @@ describe("Hiker", () => {
   });
 
   it("can go hiking", () => {
-    const mountain = new Mountain("Ben Nevis");
-    const itinerary = new Itinerary([mountain]);
+    const benNevis = new Mountain("Ben Nevis");
+    const scafellPike = new Mountain("Scafell Pike");
+    const itinerary = new Itinerary([benNevis, scafellPike]);
     const hiker = new Hiker(itinerary);
 
     hiker.goHiking();
 
     expect(hiker.currentMountain).toBeFalsy();
-    expect(hiker.previousMountain).toBe(mountain);
   });
 
   it("can reach a different peak", () => {
     const benNevis = new Mountain("Ben Nevis");
-    const hiker = new Hiker(benNevis);
-
     const scafellPike = new Mountain("Scafell Pike");
+    const itinerary = new Itinerary([benNevis, scafellPike]);
+    const hiker = new Hiker(itinerary);
 
-    hiker.reachPeak(scafellPike);
-
+    hiker.goHiking();
+    hiker.reachPeak();
 
     expect(hiker.currentMountain).toBe(scafellPike);
+  });
+
+  it("can't sail further than its itinerary", () => {
+    const benNevis = new Mountain("Ben Nevis");
+    const scafellPike = new Mountain("Scafell Pike");
+    const itinerary = new Itinerary([benNevis, scafellPike]);
+    const hiker = new Hiker(itinerary);
+
+    hiker.goHiking();
+    hiker.reachPeak();
+
+    expect(() => hiker.goHiking()).toThrowError("End of itinerary reached");
   })
 })
