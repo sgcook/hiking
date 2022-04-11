@@ -2,33 +2,39 @@ const Hiker = require("../src/Hiker.js");
 const Mountain = require("../src/Mountain.js");
 
 describe("Mountain", () => {
-  it("can be instantiated", () => {
-    expect(new Mountain()).toBeInstanceOf(Object);
-  });
+  describe("with mountain", () => {
+    let benNevis;
+    let hiker;
+    let johnMuir;
+    let nanShepherd;
 
-  it("has a name property", () => {
-    const benNevis = new Mountain("Ben Nevis");
-    expect(benNevis.name).toBe("Ben Nevis");
-  });
+    beforeEach(() => {
+      benNevis = new Mountain("Ben Nevis");
+      hiker = {};
+      johnMuir = {};
+      nanShepherd = {};
+    });
 
-  it("can add a hiker", () => {
-    const mountain = new Mountain("Ben Nevis");
-    const hiker = {};
-
-    mountain.addHiker(hiker);
-    
-    expect(mountain.hikers).toContain(hiker);
-  });
-
-  it("can remove a hiker", () => {
-    const mountain = new Mountain("Ben Nevis");
-    const johnMuir = {};
-    const nanShepherd = {};
-
-    mountain.addHiker(johnMuir);
-    mountain.addHiker(nanShepherd);
-    mountain.removeHiker(nanShepherd);
-
-    expect(mountain.hikers).toEqual([johnMuir]);
-  });
+    it("can be instantiated", () => {
+      expect(benNevis).toBeInstanceOf(Object);
+    });
+  
+    it("has a name property", () => {
+      expect(benNevis.name).toBe("Ben Nevis");
+    });
+  
+    it("can add a hiker", () => {  
+      benNevis.addHiker(hiker);
+      
+      expect(benNevis.hikers).toContain(hiker);
+    });
+  
+    it("can remove a hiker", () => {
+      benNevis.addHiker(johnMuir);
+      benNevis.addHiker(nanShepherd);
+      benNevis.removeHiker(nanShepherd);
+  
+      expect(benNevis.hikers).toEqual([johnMuir]);
+    });
+  })
 })
