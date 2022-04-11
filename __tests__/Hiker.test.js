@@ -28,6 +28,7 @@ describe("Hiker", () => {
     hiker.goHiking();
 
     expect(hiker.currentMountain).toBeFalsy();
+    expect(benNevis.hikers).not.toContain(hiker);
   });
 
   it("can reach a different peak", () => {
@@ -40,6 +41,7 @@ describe("Hiker", () => {
     hiker.reachPeak();
 
     expect(hiker.currentMountain).toBe(scafellPike);
+    expect(scafellPike.hikers).toContain(hiker);
   });
 
   it("can't sail further than its itinerary", () => {
@@ -52,5 +54,13 @@ describe("Hiker", () => {
     hiker.reachPeak();
 
     expect(() => hiker.goHiking()).toThrowError("End of itinerary reached");
-  })
+  });
+
+  it("gets added to Mountain on instantiation", () => {
+    const benNevis = new Mountain("Ben Nevis");
+    const itinerary = new Itinerary([benNevis]);
+    const hiker = new Hiker(itinerary);
+
+    expect(benNevis.hikers).toContain(hiker);
+  });
 })
