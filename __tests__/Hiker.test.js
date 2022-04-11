@@ -1,5 +1,4 @@
 const Hiker = require("../src/Hiker.js");
-const Mountain = require("../src/Mountain.js");
 const Itinerary = require("../src/Itinerary.js");
 
 describe("Hiker", () => {
@@ -10,8 +9,20 @@ describe("Hiker", () => {
     let hiker;
     
     beforeEach(() => {
-      benNevis = new Mountain("Ben Nevis");
-      scafellPike = new Mountain("Scafell Pike");
+      benNevis = {
+        addHiker: jest.fn(),
+        removeHiker: jest.fn(),
+        name: "Ben Nevis",
+        mountains: []
+      };
+      
+      scafellPike = {
+        addHiker: jest.fn(),
+        removeHiker: jest.fn(),
+        name: "Scafell Pike",
+        mountains: []
+      };
+
       itinerary = new Itinerary([benNevis, scafellPike]);
       hiker = new Hiker(itinerary);
     });
@@ -23,11 +34,12 @@ describe("Hiker", () => {
     it("has a starting mountain", () => {
       expect(hiker.currentMountain).toBe(benNevis);
     });
+
     it("can go hiking", () => {
       hiker.goHiking();
   
       expect(hiker.currentMountain).toBeFalsy();
-      expect(benNevis.hikers).not.toContain(hiker);
+      expect(benNevis.removeHiker).toHaveBeenCalledWith(hiker);
     });
   
     it("can reach a different peak", () => {
@@ -35,7 +47,7 @@ describe("Hiker", () => {
       hiker.reachPeak();
   
       expect(hiker.currentMountain).toBe(scafellPike);
-      expect(scafellPike.hikers).toContain(hiker);
+      expect(scafellPike.addHiker).toHaveBeenCalledWith(hiker);
     });
   
     it("can't sail further than its itinerary", () => {
@@ -46,7 +58,7 @@ describe("Hiker", () => {
     });
   
     it("gets added to Mountain on instantiation", () => {
-      expect(benNevis.hikers).toContain(hiker);
+      expect(benNevis.addHiker).toHaveBeenCalledWith(hiker);
     });
   })
 })

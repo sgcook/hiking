@@ -1,5 +1,4 @@
 const Itinerary = require("../src/Itinerary.js");
-const Mountain = require("../src/Mountain.js");
 
 describe("Itinerary", () => {
   it("can be instantiated", () => {
@@ -7,8 +6,8 @@ describe("Itinerary", () => {
   });
 
   it("has a mountains property", () => {
-    const benNevis = new Mountain("Ben Nevis");
-    const scafellPike = new Mountain("Scafell Pike");
+    const benNevis = jest.fn();
+    const scafellPike = jest.fn();
 
     const itinerary = new Itinerary([benNevis, scafellPike]);
 

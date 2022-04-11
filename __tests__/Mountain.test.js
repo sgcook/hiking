@@ -1,4 +1,3 @@
-const Hiker = require("../src/Hiker.js");
 const Mountain = require("../src/Mountain.js");
 
 describe("Mountain", () => {
@@ -10,9 +9,9 @@ describe("Mountain", () => {
 
     beforeEach(() => {
       benNevis = new Mountain("Ben Nevis");
-      hiker = {};
-      johnMuir = {};
-      nanShepherd = {};
+      hiker = jest.fn();
+      johnMuir = jest.fn();
+      nanShepherd = jest.fn();
     });
 
     it("can be instantiated", () => {
