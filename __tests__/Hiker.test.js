@@ -1,5 +1,4 @@
 const Hiker = require("../src/Hiker.js");
-const Itinerary = require("../src/Itinerary.js");
 
 describe("Hiker", () => {
   describe("with mountains and an itinerary", () => {
@@ -15,7 +14,7 @@ describe("Hiker", () => {
         name: "Ben Nevis",
         mountains: []
       };
-      
+
       scafellPike = {
         addHiker: jest.fn(),
         removeHiker: jest.fn(),
@@ -23,7 +22,10 @@ describe("Hiker", () => {
         mountains: []
       };
 
-      itinerary = new Itinerary([benNevis, scafellPike]);
+      itinerary = {
+        mountains: [benNevis, scafellPike]
+      };
+
       hiker = new Hiker(itinerary);
     });
 
