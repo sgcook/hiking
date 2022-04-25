@@ -34,17 +34,17 @@ body {
   background-color: #d47b4a;
 }
 
+#clouds {
+  width: 800px;
+  display: flex;
+  justify-content: space-around;
+}
+
 .cloud {
   position: relative;
   top: 15px;
   height: 20%;
   width: auto;
-  margin-left: 45px;
-  margin-right: 45px;
-}
-
-#lastCloud {
-  margin-right: 0;
 }
 
 #mountain {
