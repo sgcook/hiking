@@ -34,13 +34,7 @@ body {
   background-color: #d47b4a;
 }
 
-#clouds {
-  width: 800px;
-  display: flex;
-  justify-content: space-around;
-}
-
-.cloud {
+#cloud {
   position: relative;
   top: 15px;
   height: 20%;
